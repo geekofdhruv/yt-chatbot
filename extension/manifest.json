@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Video Chatbot",
+  "version": "1.0.0",
+  "description": "Ask questions about YouTube videos using AI and RAG",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://your-backend-api.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/watch*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube Chatbot"
+    
+  },
+ 
+  "web_accessible_resources": [
+    {
+      "resources": ["chatbot-widget.html", "chatbot-widget.css", "chatbot-widget.js"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ]
+}

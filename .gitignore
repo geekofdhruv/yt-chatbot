@@ -1,0 +1,20 @@
+# Node/Chrome extension junk
+.DS_Store
+*.log
+node_modules/
+dist/
+build/
+
+# Python backend
+__pycache__/
+*.pyc
+.env
+*.sqlite
+.vscode/
+
+# Output folders
+*.zip
+
+# IDEs
+.idea/
+*.code-workspace

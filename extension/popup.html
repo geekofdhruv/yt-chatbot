@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .status {
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    .status.active {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .status.inactive {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .info {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h3>🤖 YouTube Video Chatbot</h3>
+  </div>
+  
+  <div id="status" class="status">
+    Checking status...
+  </div>
+  
+  <div class="info">
+    <p><strong>How to use:</strong></p>
+    <ul>
+      <li>Go to any YouTube video</li>
+      <li>Look for the chatbot widget in the bottom-right corner</li>
+      <li>Click to expand and start asking questions!</li>
+    </ul>
+    
+    <p><strong>Features:</strong></p>
+    <ul>
+      <li>Ask questions about video content</li>
+      <li>Get AI-powered answers</li>
+      <li>Works with any YouTube video</li>
+    </ul>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
