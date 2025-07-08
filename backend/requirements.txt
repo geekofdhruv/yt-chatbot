@@ -1,11 +1,15 @@
 fastapi
 uvicorn
 langchain
+langchain-groq
 langchain-community
 chromadb
 python-dotenv
 tiktoken
-groq
 sentence-transformers
 youtube-transcript-api
 pydantic
+torch
+numpy
+requests
+httpx
