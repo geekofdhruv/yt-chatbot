@@ -3,6 +3,7 @@
 let currentVideoId = null;
 let chatbotWidget = null;
 
+
 // Initialize when the script loads
 init();
 
@@ -15,6 +16,8 @@ function init() {
   // Create and inject chatbot widget
   createChatbotWidget();
   
+ 
+  
   // Listen for video changes (YouTube is a SPA)
   observeVideoChanges();
   
@@ -25,6 +28,31 @@ function init() {
 function extractVideoId() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('v');
+}
+async function waitForElement(selector, timeout = 10000) {
+  return new Promise((resolve) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      resolve(element);
+      return;
+    }
+    
+    const observer = new MutationObserver(() => {
+      const element = document.querySelector(selector);
+      if (element) {
+        observer.disconnect();
+        resolve(element);
+      }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Timeout fallback
+    setTimeout(() => {
+      observer.disconnect();
+      resolve(null);
+    }, timeout);
+  });
 }
 
 function createChatbotWidget() {
@@ -41,7 +69,7 @@ function createChatbotWidget() {
     <div class="chatbot-body" id="chatbot-body">
       <div class="chat-messages" id="chat-messages">
         <div class="message bot-message">
-          Hi! I can answer questions about this video. What would you like to know?
+          Hi! I can answer questions about this video. Loading transcript...
         </div>
       </div>
       <div class="chat-input-container">
@@ -95,16 +123,16 @@ function sendMessage() {
   chrome.runtime.sendMessage({
     action: 'sendToBackend',
     data: {
-      videoId: currentVideoId,
-      question: message,
-      timestamp: Date.now()
+      query: message,
+      video_id: currentVideoId,
+  
     }
   }, (response) => {
     // Remove loading message
     removeLoadingMessage();
     
-    if (response.success) {
-      addMessageToChat(response.data.answer || 'Sorry, I could not find an answer.', 'bot');
+    if (response && response.success) {
+      addMessageToChat(response.data.response || 'Sorry, I could not find an answer.', 'bot');
     } else {
       addMessageToChat('Sorry, there was an error processing your question.', 'bot');
     }
@@ -133,7 +161,6 @@ function removeLoadingMessage() {
 }
 
 function observeVideoChanges() {
-  // Watch for URL changes in YouTube SPA
   let lastUrl = location.href;
   
   const observer = new MutationObserver(() => {
@@ -143,9 +170,10 @@ function observeVideoChanges() {
       const newVideoId = extractVideoId();
       if (newVideoId !== currentVideoId) {
         currentVideoId = newVideoId;
+        
         console.log('Video changed to:', currentVideoId);
-        // Clear chat for new video
         clearChat();
+        
       }
     }
   });
@@ -157,7 +185,7 @@ function clearChat() {
   const messagesContainer = document.getElementById('chat-messages');
   messagesContainer.innerHTML = `
     <div class="message bot-message">
-      Hi! I can answer questions about this video. What would you like to know?
+      Hi! I can answer questions about this video. Loading transcript...
     </div>
   `;
 }
@@ -167,10 +195,4 @@ function handleMessage(request, sender, sendResponse) {
     console.log('Video page loaded message received');
     currentVideoId = extractVideoId();
   }
-}
-
-// Extract video transcript (we'll implement this in the next step)
-function extractVideoTranscript() {
-  // TODO: Implement transcript extraction
-  console.log('Extracting transcript for video:', currentVideoId);
 }

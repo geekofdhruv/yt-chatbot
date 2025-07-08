@@ -10,7 +10,8 @@
   ],
   "host_permissions": [
     "https://www.youtube.com/*",
-    "https://your-backend-api.com/*"
+    "https://video.google.com/*",
+    "http://localhost:8000/*"
   ],
   "background": {
     "service_worker": "background.js"
