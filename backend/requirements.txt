@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+langchain
+langchain-community
+chromadb
+python-dotenv
+tiktoken
+groq
+sentence-transformers
+youtube-transcript-api
+pydantic
