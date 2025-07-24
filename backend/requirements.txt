@@ -3,6 +3,7 @@ uvicorn
 langchain
 langchain-groq
 langchain-community
+langchain-huggingface
 chromadb
 python-dotenv
 tiktoken
