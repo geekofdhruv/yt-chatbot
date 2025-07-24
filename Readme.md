@@ -1,11 +1,20 @@
-# YouTube Chatbot Chrome Extension 🤖🎬
+# 🎬🤖 YouTube Chatbot Chrome Extension
 
-This Chrome extension injects an AI chatbot into YouTube using LangChain + RAG.
+This Chrome Extension brings an intelligent AI chatbot directly onto YouTube, powered by **LangChain**, **Groq/OpenAI**, and **RAG (Retrieval-Augmented Generation)**. Ask context-aware questions about any YouTube video — and get smart, transcript-informed answers in real time.
 
-## Features
-- Works directly on YouTube pages
-- Uses LangChain + OpenAI for RAG-based answers
-- Transcripts or metadata fed to LLM
+---
+![Chatbot widget](assets/chatbot-widget.png)
+
+## 🚀 Features
+
+- 💬 **Chat directly on YouTube pages**
+- 🧠 **RAG-powered answers** using LangChain with Groq or OpenAI LLMs
+- 📄 **Transcripts & video metadata** are automatically retrieved and passed to the model
+- ⚡ Fast, local vector search using **ChromaDB**
+  
+  ![Chatbot Interface](assets/chatbot-interface.png)
+
+---
 
 ## Folders
 - `/extension` — Chrome Extension
